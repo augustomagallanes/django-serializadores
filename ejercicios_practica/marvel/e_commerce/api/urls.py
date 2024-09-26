@@ -3,6 +3,19 @@ from e_commerce.marvel_views import *
 
 # Importamos las API_VIEWS:
 from e_commerce.api.views import *
+from django.urls import path
+from .views import UserListAPIView
+from .views import WishListAPIView
+from .views import UserRetrieveAPIView
+
+urlpatterns = [
+    path('users/<username>/', UserRetrieveAPIView.as_view(), name='user_class_retrieve_api_view'),
+]
+
+
+urlpatterns = [
+    path('users/list/', UserListAPIView.as_view(), name='user_class_list_api_view'),
+]
 
 
 urlpatterns = [
@@ -25,6 +38,10 @@ urlpatterns = [
         RetrieveUpdateComicAPIView.as_view()
     ),
     path('comics/delete/<int:pk>/', DestroyComicAPIView.as_view()),
+
+    path('users/list/', UserListAPIView.as_view(), name='user_class_list_api_view'),
+    path('users/<username>/', UserRetrieveAPIView.as_view(), name='user_class_retrieve_api_view'),
+    path('wish/list-create/', WishListAPIView.as_view(), name='wishlist_class_api_view'),
     # TODO: User Class API View.
 
     # TODO: Wish-list Class API View.

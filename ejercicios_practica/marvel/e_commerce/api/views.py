@@ -68,7 +68,36 @@ def comic_create_api_view(request):
     )
 
 
+
+### 8. Crear una api-view basada en una clase que permita crear un registro de WishList.
+# Se busca crear una view que permita crear una lista de deseos a partir de
+# El nombre de la view debe ser: **WishListAPIView**.
+# Debe heredar de la clase genérica **ListCreateAPIView**.
+# Utilizar el serializador creado anteriormente: **WishListSerializer**.
+# La url a la cual se accede debe ser la siguiente: *{{URL}}/e-commerce/api/wish/list-create/*
+# * Esta view permite los métodos HTTP: **GET** y **POST**. 
+# * Declarar el endpoint convenientemente en el directorio *marvel/e_commerce/api/urls.py*
+# * Utiliza la función "path()" y dentro de ella, además de los parámetros conocidos, debe pasar un 3er parámetro
+# llamado **name** cuyo valor debe ser **wishlist_class_api_view**.
+
+class UserListAPIView(ListAPIView):
+
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+class UserRetrieveAPIView(RetrieveAPIView):
+
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    lookup_field = 'username'
+
+class WishListAPIView(ListCreateAPIView):
+    queryset = WishList.objects.all()
+    serializer_class = WishListSerializer
+
 # NOTE: APIs genéricas:
+
+
 class GetComicAPIView(ListAPIView):
     '''
     `[METODO GET]`
